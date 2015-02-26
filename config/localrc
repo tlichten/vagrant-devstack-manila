@@ -44,3 +44,4 @@ IMAGE_URLS="https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_
 
 MANILA_REPO_ROOT=openstack
 GIT_BASE=http://github.com
+enable_plugin manila https://github.com/openstack/manila
