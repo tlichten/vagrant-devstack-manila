@@ -1,8 +1,10 @@
 security login create -username vagrant -application ontapi -authmethod password -role admin
+network interface create -lif cluster-mgmt-lif -role cluster-mgmt -home-node VSIM-01 -home-port e0c -address 10.0.207.4 -netmask 255.255.255.0 -status-admin up 
 vserver create -vserver demo-iscsi-svm -rootvolume vol1 -aggregate aggr1 -ns-switch file -rootvolume-security-style unix
 vserver create -vserver demo-nfs-svm -rootvolume vol1 -aggregate aggr1 -ns-switch file -rootvolume-security-style unix
 iscsi create -vserver demo-iscsi-svm
 nfs create -vserver demo-nfs-svm -access true
+vserver modify -vserver demo-nfs-svm -aggr-list aggr1
 network interface create -vserver demo-iscsi-svm -lif demo-iscsi-data -role data -data-protocol iscsi -home-node VSIM-01 -home-port e0c -address 10.0.207.30 -netmask 255.255.255.0
 volume create -vserver demo-iscsi-svm -volume vol2 -aggregate aggr1 -size 10g -space-guarantee none -unix-permissions ---rwxrwxrwx
 vserver export-policy rule create -vserver demo-iscsi-svm -policyname default -clientmatch 0.0.0.0/0 -rorule any -rwrule any -superuser any -anon 0

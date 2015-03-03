@@ -282,7 +282,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     devstackvm.vm.hostname = "devstack"
 
     devstackvm.vm.provider "virtualbox" do |vb|
-      vb.customize ["modifyvm", :id, "--memory", "4096"]
+      vb.customize ["modifyvm", :id, "--memory", "8096"]
       vb.customize ["modifyvm", :id, "--cpus", "3"]
       vb.customize ["modifyvm", :id, "--nicpromisc3", "allow-all"]
     end

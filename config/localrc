@@ -44,8 +44,8 @@ IMAGE_URLS="https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_
 
 MANILA_REPO_ROOT=openstack
 GIT_BASE=http://github.com
-GIT_DEPTH=1
+#GIT_DEPTH=1
 HOST_IP=192.168.33.10
 OS_HOST_IP=$HOST_IP
 GLANCE_IMAGE_DIR=/mnt/glance/images
-enable_plugin manila https://github.com/openstack/manila
+enable_plugin manila https://review.openstack.org/openstack/manila refs/changes/24/159924/2
