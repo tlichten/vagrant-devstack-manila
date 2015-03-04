@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 configfile = 'vsim.conf'
-load configfile if File.exist?(configfile)
+load configfile
 
 BASE_IMAGE ||= "vsim_netapp-cm.tgz"
 BOX_NAME ||= "VSim"
