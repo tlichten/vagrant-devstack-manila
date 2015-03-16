@@ -6,6 +6,7 @@ sudo ovs-vsctl add-port br-ex eth2
 sudo ip link set eth2 up
 sudo ip link set eth2 promisc on
 sudo ip addr add $DEVSTACK_MGMT_IP/24 dev br-ex
+sudo iptables -t nat -A POSTROUTING -o br-ex -j MASQUERADE
 
 . devstack/openrc admin
 DEMO_TENANT_ID=$(keystone tenant-list | grep " demo" | get_field 1)
@@ -29,9 +30,9 @@ manila access-allow $MANILA_NET_ID ip $INSTANCE_IP
 
 nova floating-ip-create public
 
-FLOATING_IP=$(nova floating-ip-list | grep public | get_field 1)
+FLOATING_IP=$(nova floating-ip-list | grep public | get_field 2)
 nova add-floating-ip demo-vm0 $FLOATING_IP
-BOOT_TIMEOUT=180
+BOOT_TIMEOUT=360
 if ! timeout $BOOT_TIMEOUT sh -c "while ! ping -c1 -w1 $FLOATING_IP; do sleep 1; done"; then
         echo "Couldn't ping server"
         exit 1
