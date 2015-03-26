@@ -46,3 +46,6 @@ HOST_IP=192.168.33.10
 
 MANILA_REPO_ROOT=openstack
 enable_plugin manila https://github.com/openstack/manila
+ENABLED_SERVICES+=,horizon
+HORIZON_REPO=https://github.com/NetApp/horizon.git
+HORIZON_BRANCH=manila_kilo
