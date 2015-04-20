@@ -13,15 +13,13 @@ DEMO_TENANT_ID=$(keystone tenant-list | grep " demo" | get_field 1)
 neutron net-create p-m --provider:network_type vlan --provider:physical_network default --provider:segmentation_id 500 --tenant-id $DEMO_TENANT_ID
 . devstack/openrc demo
 
-NEUTRON_NET_ID=$(neutron net-list | grep p-m | get_field 1)
-neutron subnet-create --name p-m-0 p-m 10.58.22.0/24
-neutron router-interface-add router1 p-m-0
+NEUTRON_NET_ID=$(neutron net-list | grep private | get_field 1)
 neutron security-group-rule-create --protocol icmp default
 neutron security-group-rule-create --protocol tcp --port-range-min 22 --port-range-max 22 default
-NEUTRON_SUBNET_ID=$(neutron subnet-list | grep p-m-0 | get_field 1)
+NEUTRON_SUBNET_ID=$(neutron subnet-list | grep private-subnet | get_field 1)
 manila share-network-create --neutron-net-id $NEUTRON_NET_ID --neutron-subnet-id $NEUTRON_SUBNET_ID --name p-s
+sleep 5
 manila create --share-network p-s --name share NFS 1
-NEUTRON_NET_ID=$(neutron net-list | grep p-m | get_field 1)
 
 nova boot --poll --flavor m1.nano --image ubuntu_1204_nfs_cifs --nic net-id=$NEUTRON_NET_ID demo-vm0
 MANILA_NET_ID=$(manila list | grep share | get_field 1)

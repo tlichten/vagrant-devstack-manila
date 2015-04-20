@@ -39,6 +39,7 @@ OVS_PHYSICAL_BRIDGE=br-ex
 Q_ML2_PLUGIN_MECHANISM_DRIVERS=openvswitch
 Q_ML2_PLUGIN_TYPE_DRIVERS=flat,vlan,vxlan
 SHARE_BACKING_FILE_SIZE=8G
+Q_ML2_TENANT_NETWORK_TYPE=vlan
 
 IMAGE_URLS="https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-uec.tar.gz"
 
