@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-DEVSTACK_MGMT_IP=10.0.132.252
+DEVSTACK_MGMT_IP=10.0.135.252
 . devstack/functions
 sudo ip addr del $DEVSTACK_MGMT_IP/24 dev eth2
 sudo ovs-vsctl add-port br-ex eth2
@@ -36,3 +36,10 @@ if ! timeout $BOOT_TIMEOUT sh -c "while ! ping -c1 -w1 $FLOATING_IP; do sleep 1;
         exit 1
 fi
 
+# Tempest integartion
+eval export $(cat /opt/stack/manila/contrib/ci/pre_test_hook.sh |grep "TEMPEST_COMMIT=")
+OLD_PWD=$(pwd)
+cd /opt/stack/tempest
+git checkout $TEMPEST_COMMIT
+cp -r /opt/stack/manila/contrib/tempest /opt/stack/tempest/
+cd $OLD_PWD
