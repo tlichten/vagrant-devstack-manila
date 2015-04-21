@@ -41,7 +41,7 @@ eval export $(cat /opt/stack/manila/contrib/ci/pre_test_hook.sh |grep "TEMPEST_C
 OLD_PWD=$(pwd)
 cd /opt/stack/tempest
 git checkout $TEMPEST_COMMIT
-cp -r /opt/stack/manila/contrib/tempest /opt/stack/tempest/
+cp -r /opt/stack/manila/contrib/tempest /opt/stack/
 cd $OLD_PWD
 
 # Manila Horizon UI
