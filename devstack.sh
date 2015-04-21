@@ -52,8 +52,6 @@ then
   if [ -f $MANILA_IMAGE ]; then
     echo "Found Manila image, copy to devstack"
     su $OS_USER -c "cp $MANILA_IMAGE $DEVSTACK/files/"
-  else 
-    exit 1
   fi
 fi
 
