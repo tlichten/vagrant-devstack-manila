@@ -48,6 +48,11 @@ then
   cp $BASHPATH/config/local.conf $DEVSTACK/local.conf
   chown $OS_USER:$OS_USER $DEVSTACK/local.conf
 
+  MANILA_IMAGE="/vagrant/ubuntu_1204_nfs_cifs.qcow2"
+  if [ -f $MANILA_IMAGE ]; then
+    echo "Found Manila image, copy to devstack"
+    su $OS_USER -c "cp $MANILA_IMAGE $DEVSTACK/files/"
+  fi
 fi
 
 
