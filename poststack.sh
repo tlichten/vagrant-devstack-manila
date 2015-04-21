@@ -18,7 +18,6 @@ cd $OLD_PWD
 
 # Manila Horizon UI
 cd /opt/stack && git clone https://github.com/hp-storage/manila-ui && git clone https://github.com/hp-storage/manila-ui
-cd /opt/stack/horizon && git fetch https://review.openstack.org/openstack/horizon refs/changes/33/128133/10 && git checkout FETCH_HEAD
 cd /opt/stack/horizon && cp openstack_dashboard/local/local_settings.py.example openstack_dashboard/local/local_settings.py
 sed -i "s/'js_spec_files': \[\],/'js_spec_files': \[\],\n'customization_module': 'manila_ui.overrides',/" /opt/stack/horizon/openstack_dashboard/local/local_settings.py
 sudo pip install -e /opt/stack/manila-ui
