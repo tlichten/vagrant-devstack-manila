@@ -17,11 +17,10 @@ cp -r /opt/stack/manila/contrib/tempest /opt/stack/
 cd $OLD_PWD
 
 # Manila Horizon UI
-cd /opt/stack && git clone https://github.com/hp-storage/manila-ui && git clone https://github.com/hp-storage/manila-ui
+cd /opt/stack && git clone https://github.com/hp-storage/manila-ui
 cd /opt/stack/horizon && cp openstack_dashboard/local/local_settings.py.example openstack_dashboard/local/local_settings.py
 sed -i "s/'js_spec_files': \[\],/'js_spec_files': \[\],\n'customization_module': 'manila_ui.overrides',/" /opt/stack/horizon/openstack_dashboard/local/local_settings.py
 sudo pip install -e /opt/stack/manila-ui
-cd /opt/stack/horizon && cp ../manila-ui/_90_manila_admin_shares.py openstack_dashboard/local/enabled
-cd /opt/stack/horizon && cp ../manila-ui/_90_manila_project_shares.py openstack_dashboard/local/enabled
+cd /opt/stack/horizon && cp ../manila-ui/manila_ui/enabled/_90_manila_*.py openstack_dashboard/local/enabled
 sudo /etc/init.d/apache2 restart
 
